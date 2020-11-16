@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, Redirect } from "react-router-dom";
-import { addCommas, isEmptyArray } from "../utils";
+import { addCommas } from "../utils";
 import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-around;
 `;
 
 const Wrapper = styled.div`
+  width: 77%;
   padding: 60px;
   @media screen and (max-width: 750px) {
     padding: 10px;
