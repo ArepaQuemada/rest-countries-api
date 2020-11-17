@@ -26,8 +26,6 @@ const GlobalStyle = createGlobalStyle`
   header {
     background-color: ${(props) =>
       props.theme.color === "dark" ? "#2B3743" : "#FFFFFF"};
-    -webkit-box-shadow: 1px 6px 14px -1px rgba(0,0,0,0.43); 
-    box-shadow: 1px 6px 14px -1px rgba(0,0,0,0.43);
   }
 
   h1 {
@@ -73,8 +71,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .shadow {
-    -webkit-box-shadow: 1px -1px 12px -1px rgba(0, 0, 0, 0.7);
-    box-shadow: 1px -1px 12px -1px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: 1px -1px 12px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px -1px 12px -1px rgba(0, 0, 0, 0.1);
   }
 `;
 

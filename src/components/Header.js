@@ -35,7 +35,7 @@ export default function Header() {
   };
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper className="shadow">
       <TitleWrapper>
         <h1>Where in the world?</h1>
       </TitleWrapper>
