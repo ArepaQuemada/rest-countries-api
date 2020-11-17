@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { ModeContext } from "../context/context-mode";
 import { capitalize } from "../utils";
-import moon from "../images/moon.svg";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.header`

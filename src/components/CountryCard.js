@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const CardWrapper = styled.div`
+  width: 100%;
   max-width: 250px;
   margin-bottom: 85px;
   transition: all .2s ease-in-out;
