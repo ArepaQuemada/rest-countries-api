@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    transition: .50s;
+    transition: .1s;
     line-height: 1.8;
     margin: 0;
     padding: 0;
