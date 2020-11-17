@@ -20,11 +20,13 @@ const TitleWrapper = styled.div`
   max-width: 85%;
 `;
 
-const MoonSvg = styled.img`
+const MoonDiv = styled.div`
   cursor: pointer;
-  width: 15px;
-  margin-right: 8px;
-  fill: blue;
+  display: flex;
+  align-items: center;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 export default function Header() {
@@ -39,7 +41,9 @@ export default function Header() {
       <TitleWrapper>
         <h1>Where in the world?</h1>
       </TitleWrapper>
-      <MoonSvg src={moon} alt="moon-icon" onClick={handleClick} />
+      <MoonDiv onClick={handleClick}>
+        <ion-icon name="moon-outline"></ion-icon>
+      </MoonDiv>
       <span>{capitalize(mode.color)} Mode</span>
     </HeaderWrapper>
   );
