@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { ModeContext } from "./context/context-mode";
 import { CountriesContext } from "./context/context-countries";
@@ -6,6 +6,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 import MainView from "./components/MainView";
 import CountryPage from "./components/CountryPage";
+import BackDropSinner from "./components/BackDropSinner";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -79,16 +80,23 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   const [mode] = useContext(ModeContext);
   const {setCountries} = useContext(CountriesContext);
+  const [loading, setLoading] = useState(false);
   const url = "https://restcountries.eu/rest/v2/all";
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const response = await fetch(url);
       const json = await response.json();
       setCountries(json);
+      setLoading(false);
     };
     fetchData();
-  }, [setCountries]);
+  }, [setCountries, setLoading]);
+
+  if (loading) {
+    return <BackDropSinner />
+  }
 
   return (
     <>

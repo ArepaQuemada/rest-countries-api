@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import BackDropSpinner from "./BackDropSinner";
 import { Link, useLocation, Redirect } from "react-router-dom";
 import { addCommas } from "../utils";
 import styled from "styled-components";
@@ -145,11 +146,15 @@ const initialState = [];
 export default function CountryPage() {
   const { state } = useLocation();
   const [countries, setCountries] = useState(initialState);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (state) {
-      Promise.all(state.country.borders.map((b) => fetchBorder(b))).then((r) =>
-        setCountries(r)
+      Promise.all(state.country.borders.map((b) => fetchBorder(b))).then(
+        (r) => {
+          setCountries(r);
+          setLoading(false);
+        }
       );
     }
   }, [state]);
@@ -158,7 +163,11 @@ export default function CountryPage() {
     return <Redirect to="/"></Redirect>;
   }
 
-  console.log(countries)
+  if (loading) {
+      return <BackDropSpinner color="red" size={100}/>
+  }
+
+  console.log(countries);
 
   const {
     country: {
@@ -177,7 +186,7 @@ export default function CountryPage() {
 
   const parsedCurrencies = addCommas(currencies);
   const parsedLanguages = addCommas(languages);
-
+  console.log(loading)
   return (
     <Container>
       <Wrapper>
@@ -251,7 +260,8 @@ export default function CountryPage() {
               </div>
               <BorderButtonsWrapper>
                 {countries.map((country, index) => (
-                  <Link  key={index}
+                  <Link
+                    key={index}
                     to={{
                       pathname: `/country/${country.name}`,
                       state: {
