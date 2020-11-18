@@ -19,12 +19,20 @@ const TitleWrapper = styled.div`
   max-width: 85%;
 `;
 
-const MoonDiv = styled.div`
+const MoonButton = styled.button`
+  padding: 5px;
   cursor: pointer;
+  outline: none;
+  border: none;
+  background: transparent;
   display: flex;
   align-items: center;
+  transition: .2s;
+  border-radius: 5px;
+  color: ${(props) => (props.theme.color === "dark" ? "#E7EDF0" : "#1C1D1F")};
   &:hover {
-    opacity: 0.5;
+    opacity: 0.8;
+    border: 3px solid ${(props) => (props.theme.color === "dark" ? "#E7EDF0" : "#1C1D1F")};
   }
 `;
 
@@ -40,10 +48,10 @@ export default function Header() {
       <TitleWrapper>
         <h1>Where in the world?</h1>
       </TitleWrapper>
-      <MoonDiv onClick={handleClick}>
+      <MoonButton onClick={handleClick}>
         <ion-icon name="moon-outline"></ion-icon>
-      </MoonDiv>
-      <span>{capitalize(mode.color)} Mode</span>
+        <span>{capitalize(mode.color)} Mode</span>
+      </MoonButton>
     </HeaderWrapper>
   );
 }

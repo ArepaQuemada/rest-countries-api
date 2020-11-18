@@ -60,6 +60,11 @@ const Flag = styled.img`
   max-height: 100%;
 `;
 
+const InfoContainer = styled.div`
+  width: 100%;
+  max-width: 600px;
+`;
+
 const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -102,7 +107,8 @@ const BordersWrapper = styled.div`
 const BorderButtonsWrapper = styled.div`
   width: 60%;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: left;
   @media screen and (max-width: 980px) {
     width: 100%;
   }
@@ -110,9 +116,11 @@ const BorderButtonsWrapper = styled.div`
 
 const BorderButton = styled(Button)`
   align-items: center;
-  width: 88px;
+  width: 120px;
+  height: 50px;
   padding: 3px;
   margin-top: 0;
+  margin-bottom: 5px;
 `;
 
 const fetchBorder = async (b) => {
@@ -130,10 +138,7 @@ export default function CountryPage() {
 
   useEffect(() => {
     if (state) {
-      const parsedBorders = state.country.borders.filter(
-        (b, index) => b && index < 3
-      );
-      Promise.all(parsedBorders.map((b) => fetchBorder(b))).then((r) =>
+      Promise.all(state.country.borders.map((b) => fetchBorder(b))).then((r) =>
         setCountries(r)
       );
     }
@@ -142,6 +147,8 @@ export default function CountryPage() {
   if (!state) {
     return <Redirect to="/"></Redirect>;
   }
+
+  console.log(countries)
 
   const {
     country: {
@@ -178,7 +185,7 @@ export default function CountryPage() {
           <BannerWrapper>
             <Flag src={flag} alt="flag"></Flag>
           </BannerWrapper>
-          <div>
+          <InfoContainer>
             <h2>{name}</h2>
             <InfoWrapper>
               <div>
@@ -249,7 +256,7 @@ export default function CountryPage() {
                 ))}
               </BorderButtonsWrapper>
             </BordersWrapper>
-          </div>
+          </InfoContainer>
         </DescriptionWrapper>
       </Wrapper>
     </Container>
