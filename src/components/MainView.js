@@ -39,6 +39,12 @@ const InputCountry = styled.input`
   flex-grow: 1;
   padding: 20px;
   padding-left: 40px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: ${(props) =>
+      props.theme.color === "dark" ? "#202D36" : "#FAFAFA"};
+    opacity: 0.7;  
+  }
 
   @media (max-width: 750px) {
     max-width: 100%;
@@ -46,11 +52,19 @@ const InputCountry = styled.input`
 `;
 
 const Select = styled.select`
+  cursor: pointer;
   width: 100%;
   max-width: 250px;
   padding: 20px;
   border-radius: 10px;
   outline: none;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: ${(props) =>
+      props.theme.color === "dark" ? "#202D36" : "#FAFAFA"};
+    opacity: 0.7;
+  }
 `;
 
 const initialValue = {

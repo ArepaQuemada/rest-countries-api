@@ -77,9 +77,19 @@ const InfoWrapper = styled.div`
   }
 `;
 
-const InfoRight = styled.div`
+const InfoLeft = styled.div`
+  max-width: 250px;
   @media screen and (max-width: 980px) {
     margin-top: 20px;
+    max-width: 100%;
+  }
+`;
+
+const InfoRight = styled.div`
+  max-width: 250px;
+  @media screen and (max-width: 980px) {
+    margin-top: 20px;
+    max-width: 100%;
   }
 `;
 
@@ -188,7 +198,7 @@ export default function CountryPage() {
           <InfoContainer>
             <h2>{name}</h2>
             <InfoWrapper>
-              <div>
+              <InfoLeft>
                 <List>
                   <li>
                     {" "}
@@ -216,7 +226,7 @@ export default function CountryPage() {
                     <span>{capital}</span>
                   </li>
                 </List>
-              </div>
+              </InfoLeft>
               <InfoRight>
                 <List>
                   <li>
