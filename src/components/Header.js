@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ModeContext } from "../context/context-mode";
 import { capitalize } from "../utils";
 import styled from "styled-components";
@@ -27,12 +27,13 @@ const MoonButton = styled.button`
   background: transparent;
   display: flex;
   align-items: center;
-  transition: .2s;
+  transition: 0.2s;
   border-radius: 5px;
   color: ${(props) => (props.theme.color === "dark" ? "#E7EDF0" : "#1C1D1F")};
   &:hover {
     opacity: 0.8;
-    border: 3px solid ${(props) => (props.theme.color === "dark" ? "#E7EDF0" : "#1C1D1F")};
+    border: 3px solid
+      ${(props) => (props.theme.color === "dark" ? "#E7EDF0" : "#1C1D1F")};
   }
 `;
 
@@ -42,6 +43,10 @@ export default function Header() {
   const handleClick = () => {
     setMode({ color: mode.color === "ligth" ? "dark" : "ligth" });
   };
+
+  useEffect(() => {
+    localStorage.setItem("mode", JSON.stringify(mode));
+  }, [mode]);
 
   return (
     <HeaderWrapper className="shadow">
