@@ -10,6 +10,9 @@ const CardWrapper = styled.div`
   &:hover {
     transform: scale(1.1);
   }
+  &:active {
+    transform: scale(1.1);
+  }
 `;
 
 const BannerWrapper = styled.div`

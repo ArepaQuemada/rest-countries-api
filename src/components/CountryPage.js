@@ -154,8 +154,10 @@ export default function CountryPage() {
     if (state) {
       Promise.all(state.country.borders.map((b) => fetchBorder(b))).then(
         (r) => {
-          setCountries(r);
-          setLoading(false);
+          setTimeout(() => {
+            setCountries(r);
+            setLoading(false);
+          }, 400);
         }
       );
     }
