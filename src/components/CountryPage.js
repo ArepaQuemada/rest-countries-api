@@ -116,7 +116,7 @@ const BordersWrapper = styled.div`
 `;
 
 const BorderButtonsWrapper = styled.div`
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
@@ -127,9 +127,11 @@ const BorderButtonsWrapper = styled.div`
 
 const BorderButton = styled(Button)`
   align-items: center;
+  margin-left: 3px;
+  margin-right: 3px;
   width: 120px;
-  height: 50px;
-  padding: 3px;
+  max-height: 50px;
+  padding: 5px;
   margin-top: 0;
   margin-bottom: 5px;
 `;
@@ -253,9 +255,7 @@ export default function CountryPage() {
               </InfoRight>
             </InfoWrapper>
             <BordersWrapper>
-              <div>
-                <Bold>Border Countries: </Bold>
-              </div>
+              <Bold>Border Countries: </Bold>
               <BorderButtonsWrapper>
                 {countries.map((country, index) => (
                   <Link
