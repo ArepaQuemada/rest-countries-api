@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Container = styled.div`
   position: absolute;
   top: 0;
+  right: 0;
   height: 100vh;
   width: 100%;
   display: flex;
