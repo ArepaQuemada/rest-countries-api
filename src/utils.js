@@ -14,3 +14,5 @@ export const addCommas = (arr) => {
     return <span key={index}>{`${e.name}`}</span>;;
   });
 };
+
+export const format = (number) => new Intl.NumberFormat().format(number);

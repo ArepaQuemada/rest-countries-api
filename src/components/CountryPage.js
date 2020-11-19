@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BackDropSpinner from "./BackDropSinner";
 import { Link, useLocation, Redirect } from "react-router-dom";
-import { addCommas } from "../utils";
+import { addCommas, format } from "../utils";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -167,8 +167,6 @@ export default function CountryPage() {
       return <BackDropSpinner color="red" size={100}/>
   }
 
-  console.log(countries);
-
   const {
     country: {
       flag,
@@ -186,7 +184,7 @@ export default function CountryPage() {
 
   const parsedCurrencies = addCommas(currencies);
   const parsedLanguages = addCommas(languages);
-  console.log(loading)
+  
   return (
     <Container>
       <Wrapper>
@@ -217,7 +215,7 @@ export default function CountryPage() {
                   <li>
                     {" "}
                     <Bold>Population: </Bold>
-                    <span>{population}</span>
+                    <span>{format(population)}</span>
                   </li>
                   <li>
                     {" "}

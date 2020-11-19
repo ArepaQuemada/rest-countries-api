@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { format } from "../utils";
 
 const CardWrapper = styled.div`
   width: 100%;
@@ -66,7 +67,7 @@ export default function CountryCard({ country }) {
         <CardTitle>{name}</CardTitle>
         <InfoDiv>
           <Bold>Population:</Bold>
-          <span>{new Intl.NumberFormat().format(population)}</span>
+          <span>{format(population)}</span>
         </InfoDiv>
         <InfoDiv>
           <Bold>Region:</Bold>
