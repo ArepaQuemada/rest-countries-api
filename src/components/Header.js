@@ -30,6 +30,7 @@ const MoonButton = styled.button`
   transition: 0.2s;
   border-radius: 5px;
   color: ${(props) => (props.theme.color === "dark" ? "#E7EDF0" : "#1C1D1F")};
+  border: 3px solid transparent;
   &:hover {
     opacity: 0.8;
     border: 3px solid
