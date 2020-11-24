@@ -101,7 +101,7 @@ const MainView = React.memo(() => {
           className="shadow"
           onChange={handleSelect}
         >
-          <option disabled value="none">
+          <option disabled value="none" selected>
             Filter by region
           </option>
           <option value="Africa">Africa</option>
