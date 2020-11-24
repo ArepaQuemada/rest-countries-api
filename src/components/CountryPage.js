@@ -151,6 +151,7 @@ export default function CountryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     if (state) {
       Promise.all(state.country.borders.map((b) => fetchBorder(b))).then(
         (r) => {
