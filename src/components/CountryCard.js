@@ -52,13 +52,13 @@ const InfoDiv = styled.div`
 `;
 
 export default function CountryCard({ country }) {
-  const { flag, name, population, region, capital } = country;
+  const { flag, name, population, region, capital, alpha2Code, alpha3Code } = country;
 
   return (
     <CardWrapper className="shadow">
       <BannerWrapper>
         <Link to={{
-          pathname: `/country/${name}`,
+          pathname: `/country/${alpha2Code || alpha3Code}`,
           state: {
             country
           } 
