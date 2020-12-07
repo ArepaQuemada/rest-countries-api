@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import BackDropSpinner from "./BackDropSinner";
-import { Link, useLocation, Redirect } from "react-router-dom";
-import { addCommas, format } from "../utils";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import BackDropSpinner from './BackDropSinner';
+import { Link, useParams } from 'react-router-dom';
+import { getSingleCountry } from '../services/getSingleCountry';
+import { addCommas, format } from '../utils';
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -27,8 +28,8 @@ const Button = styled.button`
   width: 150px;
   border-radius: 10px;
   background-color: ${(props) =>
-    props.theme.color === "dark" ? "#2B3743" : "#FFFFFF"};
-  color: ${(props) => (props.theme.color === "dark" ? "#E7EDF0" : "#1C1D1F")};
+    props.theme.color === 'dark' ? '#2B3743' : '#FFFFFF'};
+  color: ${(props) => (props.theme.color === 'dark' ? '#E7EDF0' : '#1C1D1F')};
   padding: 15px;
   outline: none;
   border: none;
@@ -136,60 +137,48 @@ const BorderButton = styled(Button)`
   margin-bottom: 5px;
 `;
 
-const fetchBorder = async (b) => {
-  const url = "https://restcountries.eu/rest/v2/alpha/";
-  const data = await fetch(url + b);
-  const json = await data.json();
-  return json;
-};
-
-const initialState = [];
-
 export default function CountryPage() {
-  const { state } = useLocation();
-  const [countries, setCountries] = useState(initialState);
+  const { name: countryName } = useParams();
+  const [state, setstate] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    if (state) {
-      Promise.all(state.country.borders.map((b) => fetchBorder(b))).then(
-        (r) => {
-          setTimeout(() => {
-            setCountries(r);
-            setLoading(false);
-          }, 400);
-        }
-      );
-    }
-  }, [state]);
-
-  if (!state) {
-    return <Redirect to="/"></Redirect>;
-  }
+    const ac = new AbortController();
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [country] = await getSingleCountry(countryName);
+        setstate(country);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+    return () => {
+      ac.abort();
+    };
+  }, [countryName]);
 
   if (loading) {
-      return <BackDropSpinner color="red" size={100}/>
+    return <BackDropSpinner color="red" size={100} />;
   }
 
   const {
-    country: {
-      flag,
-      name,
-      nativeName,
-      subRegion,
-      topLevelDomain,
-      currencies,
-      languages,
-      population,
-      region,
-      capital,
-    } = {},
+    flag,
+    name,
+    nativeName,
+    subRegion,
+    topLevelDomain,
+    currencies,
+    languages,
+    population,
+    region,
+    capital,
+    borders,
   } = state;
 
-  const parsedCurrencies = addCommas(currencies);
-  const parsedLanguages = addCommas(languages);
-  
   return (
     <Container>
       <Wrapper>
@@ -213,27 +202,27 @@ export default function CountryPage() {
               <InfoLeft>
                 <List>
                   <li>
-                    {" "}
+                    {' '}
                     <Bold>Native name: </Bold>
                     <span>{nativeName}</span>
                   </li>
                   <li>
-                    {" "}
+                    {' '}
                     <Bold>Population: </Bold>
                     <span>{format(population)}</span>
                   </li>
                   <li>
-                    {" "}
+                    {' '}
                     <Bold>Region: </Bold>
                     <span>{region}</span>
                   </li>
                   <li>
-                    {" "}
+                    {' '}
                     <Bold>Sub Region: </Bold>
                     <span>{subRegion}</span>
                   </li>
                   <li>
-                    {" "}
+                    {' '}
                     <Bold>Capital: </Bold>
                     <span>{capital}</span>
                   </li>
@@ -246,12 +235,12 @@ export default function CountryPage() {
                     <span>{topLevelDomain}</span>
                   </li>
                   <li>
-                    <Bold>Currencies: </Bold>
-                    {parsedCurrencies}
+                    <Bold>Currencies:</Bold>
+                    {addCommas(currencies)}
                   </li>
                   <li>
                     <Bold>Languages: </Bold>
-                    {parsedLanguages}
+                    {addCommas(languages)}
                   </li>
                   <li></li>
                 </List>
@@ -260,19 +249,14 @@ export default function CountryPage() {
             <BordersWrapper>
               <Bold>Border Countries: </Bold>
               <BorderButtonsWrapper>
-                {countries.map((country, index) => (
+                {borders.map((border, index) => (
                   <Link
                     key={index}
                     to={{
-                      pathname: `/country/${country.name}`,
-                      state: {
-                        country,
-                      },
+                      pathname: `/country/${border}`,
                     }}
                   >
-                    <BorderButton className="shadow">
-                      {country.name}
-                    </BorderButton>
+                    <BorderButton className="shadow">{border}</BorderButton>
                   </Link>
                 ))}
               </BorderButtonsWrapper>

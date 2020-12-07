@@ -1,0 +1,1 @@
+export const HOST = 'https://restcountries.eu/rest/v2/';

@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { ModeContext } from "../context/context-mode";
-import { AtomSpinner } from "react-epic-spinners";
-import styled from "styled-components";
+import { useContext } from 'react';
+import { ModeContext } from '../context/context-mode';
+import { AtomSpinner } from 'react-epic-spinners';
+import styled from 'styled-components';
 
 const Container = styled.div`
   position: absolute;
@@ -12,14 +12,19 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${(props) =>
+    props.color === 'dark' ? '#202D36' : '#FAFAFA'};
 `;
 
 export default function BackDropSinner() {
   const [mode] = useContext(ModeContext);
-  
+
   return (
-    <Container>
-      <AtomSpinner color={mode.color === "ligth" ? "black" : "white"} size={100}/>
+    <Container color={mode.color}>
+      <AtomSpinner
+        color={mode.color === 'ligth' ? 'black' : 'white'}
+        size={100}
+      />
     </Container>
-  )
+  );
 }
